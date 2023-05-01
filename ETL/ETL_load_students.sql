@@ -19,8 +19,8 @@ MERGE INTO Dim_Student AS TT
 	ON TT.LastName = ST.LastName AND TT.FirstName = ST.FirstName AND TT.Email = ST.Email
 	WHEN NOT MATCHED
 		THEN
-			INSERT (LastName, FirstName, Email, IsCurrent)
-			VALUES (ST.LastName, ST.FirstName, ST.Email, ST.IsCurrent)
+			INSERT (LastName, FirstName, Email, IsCurrent, StartTime, EndTime)
+			VALUES (ST.LastName, ST.FirstName, ST.Email, ST.IsCurrent, '2015-01-01', '9999-12-31')
 	WHEN NOT MATCHED BY SOURCE
 		THEN
 			DELETE

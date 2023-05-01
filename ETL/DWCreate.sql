@@ -1,7 +1,7 @@
 
 CREATE TABLE Dim_Survey (
   ID_Survey  NUMERIC IDENTITY(1,1) PRIMARY KEY,
-  Status VARCHAR(14) CHECK (Status IN ('fulfilled', 'not fulfilled'))
+  Status VARCHAR(14)
 );
 
 CREATE TABLE Dim_Student (
@@ -9,12 +9,14 @@ CREATE TABLE Dim_Student (
   LastName VARCHAR(55),
   FirstName VARCHAR(55),
   Email VARCHAR(60),
-  IsCurrent BIT
+  IsCurrent BIT,
+  StartTime DateTime,
+  EndTime DateTime
 );
 
 CREATE TABLE Dim_Time (
   ID_Time NUMERIC IDENTITY(1,1) PRIMARY KEY,
-  Hour NUMERIC CHECK (Hour >= 0 AND Hour <= 23),
+  Hour NUMERIC,
   TimeOfDay VARCHAR(20)
 );
 
@@ -22,14 +24,10 @@ CREATE TABLE Dim_Date (
   ID_Date NUMERIC IDENTITY(1,1) PRIMARY KEY,
   Date datetime unique,
   Year NUMERIC(4),
-  Month VARCHAR(10) CHECK (Month IN ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December')),
+  Month VARCHAR(10),
   MonthNo NUMERIC,
-  DayOfWeek VARCHAR(10) CHECK (DayOfWeek IN ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday')),
-  DayOfWeekNo NUMERIC,
-  WorkingDay VARCHAR(15) CHECK (WorkingDay IN ('day off', 'working day')),
-  Vacation VARCHAR(20) CHECK (Vacation IN ('non-holiday', 'winter holiday', 'summer holiday')),
-  Holiday VARCHAR(50),
-  BeforeHolidayDay VARCHAR(62)
+  DayOfWeek VARCHAR(10) ,
+  DayOfWeekNo NUMERIC
 );
 
 CREATE TABLE Dim_Tutor (
@@ -64,8 +62,10 @@ CREATE TABLE Fact_Enrollment (
   CONSTRAINT composite_pk PRIMARY KEY (
 		ID_Course,
 		ID_Student, 
-		ID_StartDate, 
-		ID_FinishDate
+		ID_StartDate,		
+		ID_FinishDate,
+		ID_Time,
+		ID_Survey
 		)
 );
 

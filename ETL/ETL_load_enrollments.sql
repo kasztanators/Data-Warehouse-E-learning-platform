@@ -21,7 +21,6 @@ BULK INSERT dbo.SurveyTemp
 
 If (object_id('vETLFEnrollments') is not null) Drop view vETLFEnrollments;
 go
-
 CREATE VIEW vETLFEnrollments
 AS
 SELECT 
@@ -43,7 +42,7 @@ FROM
 		, ID_StartDate = SD.ID_Date
 		, ID_FinishDate = FD.ID_Date
 		, ID_Time = dbo.Dim_Time.ID_Time
-		, ID_Course = course.Course_ID
+		, ID_Course = EN1.Course_ID
 		, ID_Student = EN1.Student_ID
 		, ID_Survey = CASE WHEN SurTemp.ID_Enrollment IS NOT NULL THEN 1 ELSE 2 END
 		, CompletitionPercentage = EN1.Percentage_of_Complitness
@@ -52,16 +51,15 @@ FROM
 		, HardnessRate = CASE WHEN SurTemp.HardnessRate  IS NOT NULL THEN SurTemp.HardnessRate ELSE 0 END
 		, TutorRate = CASE WHEN SurTemp.TutorRate  IS NOT NULL THEN SurTemp.TutorRate ELSE 0 END
 	FROM uniLearnDB.dbo.Enrollments as EN1
-	LEFT JOIN dbo.SurveyTemp AS SurTemp ON SurTemp.ID_Enrollment = EN1.Enrollment_ID
+	FULL  JOIN dbo.SurveyTemp AS SurTemp ON SurTemp.ID_Enrollment = EN1.Enrollment_ID
 	JOIN dbo.Dim_Date AS SD ON CONVERT(VARCHAR(10), SD.Date, 111) = CONVERT(VARCHAR(10), EN1.Date_of_Start, 111)
 	JOIN dbo.Dim_Date as FD ON CONVERT(VARCHAR(10), FD.Date, 111) = CONVERT(VARCHAR(10), EN1.Date_of_Complitness, 111)
 	JOIN dbo.Dim_Time ON dbo.Dim_Time.Hour = DATEPART(Hour, EN1.Date_of_Start)
-	JOIN uniLearnDB.dbo.Courses AS course ON course.Course_ID = EN1.Course_ID
 	) AS E
 
-	SELECT * FROM vETLFEnrollments
 GO
-
+SELECT * FROM vETLFEnrollments;
+SELECT * FROM  uniLearnDB.dbo.Enrollments;
 
 MERGE INTO Fact_Enrollment as TT
 	USING vETLFEnrollments as ST
@@ -95,3 +93,5 @@ MERGE INTO Fact_Enrollment as TT
 			);
 
 Drop view vETLFEnrollments;
+
+SELECT * FROM Fact_Enrollment

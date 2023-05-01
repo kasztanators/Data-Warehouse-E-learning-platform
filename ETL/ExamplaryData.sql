@@ -85,3 +85,14 @@ SET IDENTITY_INSERT dbo.Dim_Faculty OFF;
 SET IDENTITY_INSERT dbo.Dim_Course ON; 
 INSERT INTO Dim_Course (ID_Course, Name, NumOfHours, ID_Faculty) VALUES (-1,'unknown', 'unknown', NULL);
 SET IDENTITY_INSERT dbo.Dim_Course OFF; 
+
+y
+INSERT INTO Fact_Enrollment (Grade, ID_StartDate, ID_FinishDate, ID_Course, ID_Student, ID_Survey, ID_TIME, CompletitionPercentage, ContentRate, TimeRate, HardnessRate, ToutorRate) VALUES
+( 4.5, 1, 2, 1, 1, 1, 1, 80, 9, 8, 7, 9),
+( 3.5, 3, 4, 2, 2, 2, 2, 60, 6, 7, 5, 6),
+( 2.0, 2, 5, 3, 3, 3, 3, 75, 7, 8, 6, 7),
+( 4.0, 1, 3, 4, 4, 4, 4, 90, 9, 9, 8, 9);
+
+INSERT INTO Fact_Teachings (ID_Tutor, ID_Course) VALUES (1, 2);
+INSERT INTO Fact_Teachings (ID_Tutor, ID_Course) VALUES (2, 1);
+INSERT INTO Fact_Teachings (ID_Tutor, ID_Course) VALUES (3, 3);
