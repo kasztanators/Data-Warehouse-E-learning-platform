@@ -1,3 +1,15 @@
+use uniLearn
+go
+
+DROP TABLE Fact_Teachings;
+DROP TABLE Fact_Enrollment;
+DROP TABLE Dim_Course;
+DROP TABLE Dim_Faculty;
+DROP TABLE Dim_Tutor;
+DROP TABLE Dim_Date;
+DROP TABLE Dim_Time;
+DROP TABLE Dim_Student;
+DROP TABLE Dim_Survey;
 
 CREATE TABLE Dim_Survey (
   ID_Survey  NUMERIC IDENTITY(1,1) PRIMARY KEY,
@@ -74,13 +86,4 @@ CREATE TABLE Fact_Teachings (
   ID_Course NUMERIC REFERENCES Dim_Course(ID_Course)
   CONSTRAINT Teachings_PK PRIMARY KEY (ID_Tutor, ID_Course)
 );
-DROP TABLE Fact_Teachings;
-DROP TABLE Fact_Enrollment;
-DROP TABLE Dim_Course;
-DROP TABLE Dim_Faculty;
-DROP TABLE Dim_Tutor;
-DROP TABLE Dim_Date;
-DROP TABLE Dim_Time;
-DROP TABLE Dim_Student;
-DROP TABLE Dim_Survey;
 

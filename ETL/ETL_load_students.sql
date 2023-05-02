@@ -28,4 +28,4 @@ MERGE INTO Dim_Student AS TT
 
 DROP VIEW vETLDimStudentData;
 
-SELECT * FROM Dim_Student
+SELECT * FROM Dim_Student order by ID_Student
