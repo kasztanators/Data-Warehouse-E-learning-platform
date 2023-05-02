@@ -1,9 +1,18 @@
+use uniLearn
+go
 SELECT * FROM Fact_Teachings;
 SELECT * FROM Fact_Enrollment;
-SELECT * FROM Dim_Course;
-SELECT * FROM Dim_Faculty;
-SELECT * FROM Dim_Tutor;
-SELECT * FROM Dim_Date;
-SELECT * FROM Dim_Time;
-SELECT * FROM Dim_Student;
-SELECT * FROM Dim_Survey;
+SELECT * FROM Dim_Course
+ORDER BY ID_Course;
+SELECT * FROM Dim_Faculty
+ORDER BY ID_Faculty;
+SELECT * FROM Dim_Tutor
+ORDER BY ID_Tutor;
+SELECT * FROM Dim_Date
+ORDER BY ID_Date;
+SELECT * FROM Dim_Time
+ORDER BY ID_Time;
+SELECT * FROM Dim_Student
+ORDER BY ID_Student;
+SELECT * FROM Dim_Survey
+ORDER BY ID_Survey;
