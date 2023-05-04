@@ -15,6 +15,7 @@ CREATE TABLE Students (
 	LastName varchar(255) CHECK(LastName NOT LIKE '%[^A-Z]%') NOT NULL,
     FirstName varchar(255) CHECK(FirstName NOT LIKE '%[^A-Z]%') NOT NULL,
 	Email varchar(255),
+	Student_Index int
 	PRIMARY KEY (Student_ID)
 	);
 CREATE TABLE Courses (
