@@ -27,7 +27,6 @@ SELECT DISTINCT
 FROM uniLearnDB.dbo.Students;
 GO
 
-
 MERGE INTO Dim_Student as TT
 USING vETLDimStudentData as ST
 	ON TT.LastName = ST.[c1] 
@@ -50,11 +49,15 @@ SELECT * FROM Dim_Student order by Dim_Student.Student_Index
 
 SELECT * FROM TEMP WHERE action = 'update'
 SELECT * FROM vETLDimStudentData
-
+--new insert 
 INSERT INTO uniLearnDB.dbo.Students VALUES(10001,'Robert','Rodriguez', 'laura27@example.net',10000)
-SELECT * FROM uniLearnDB.dbo.Students
+--update 
+UPDATE uniLearnDB.dbo.Students 
+SET Email = 'newemali@gmail.com'
+WHERE Student_Index = 9999
 
 
+SELECT * FROM uniLearnDB.dbo.Students order by Student_Index
 
 DELETE FROM uniLearnDB.dbo.Students WHERE  Student_ID > 10000;
 
