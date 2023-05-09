@@ -40,7 +40,7 @@ FROM
 	(SELECT 
 		Grade =  EN1.Grade
 		, ID_StartDate = SD.ID_Date
-		, ID_FinishDate = FD.ID_Date
+		, ID_FinishDate = CASE WHEN FD.ID_Date  IS NOT NULL THEN FD.ID_Date ELSE -1 END
 		, ID_Time = dbo.Dim_Time.ID_Time
 		, ID_Course = EN1.Course_ID
 		, ID_Student = EN1.Student_ID
@@ -53,13 +53,12 @@ FROM
 	FROM uniLearnDB.dbo.Enrollments as EN1
 	FULL  JOIN dbo.SurveyTemp AS SurTemp ON SurTemp.ID_Enrollment = EN1.Enrollment_ID
 	JOIN dbo.Dim_Date AS SD ON CONVERT(VARCHAR(10), SD.Date, 111) = CONVERT(VARCHAR(10), EN1.Date_of_Start, 111)
-	JOIN dbo.Dim_Date as FD ON CONVERT(VARCHAR(10), FD.Date, 111) = CONVERT(VARCHAR(10), EN1.Date_of_Complitness, 111)
+	FULL JOIN dbo.Dim_Date as FD ON CONVERT(VARCHAR(10), FD.Date, 111) = CONVERT(VARCHAR(10), EN1.Date_of_Complitness, 111)
 	JOIN dbo.Dim_Time ON dbo.Dim_Time.Hour = DATEPART(Hour, EN1.Date_of_Start)
 	) AS E
 
 GO
-SELECT * FROM vETLFEnrollments;
-SELECT * FROM  uniLearnDB.dbo.Enrollments;
+
 
 MERGE INTO Fact_Enrollment as TT
 	USING vETLFEnrollments as ST
@@ -95,3 +94,6 @@ MERGE INTO Fact_Enrollment as TT
 Drop view vETLFEnrollments;
 
 SELECT * FROM Fact_Enrollment
+where ID_FinishDate = -1
+
+
