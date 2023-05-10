@@ -20,9 +20,8 @@ SELECT DISTINCT
 	LastName as [c1],
 	FirstName as [c2],
 	Email as [c3],
-	1 AS [c4], 
 	'2015-01-01' as [c5],
-	'9999-12-31' as[c6],
+	NULL as[c6],
 	Student_Index as [c7]
 FROM uniLearnDB.dbo.Students;
 GO
@@ -32,28 +31,51 @@ USING vETLDimStudentData as ST
 	ON TT.LastName = ST.[c1] 
 	AND TT.FirstName = ST.[c2] 
 	AND TT.Student_Index = ST.[c7]
-	WHEN NOT MATCHED THEN
+	WHEN NOT MATCHED  THEN
 		INSERT (LastName, FirstName, Email, IsCurrent, StartTime, EndTime, Student_Index)
-		VALUES (ST.[c1], ST.[c2], ST.[c3], 1, '2015-01-01', '9999-12-31', ST.[c7])
-	WHEN MATCHED AND TT.Email <> ST.[c3] THEN
-		UPDATE SET IsCurrent = 0, EndTime = CAST(GETDATE() AS DATE)
-	OUTPUT $action, ST.[c1], ST.[c2], ST.[c3], ST.[c7] INTO TEMP;
-go
+		VALUES (ST.[c1], ST.[c2], ST.[c3], 1, '2015-01-01', NULL, ST.[c7])
+	WHEN MATCHED AND TT.Email <> ST.[c3] AND TT.isCurrent !=0  THEN
+		UPDATE SET IsCurrent = 0, EndTime = CAST(GETDATE() AS DATE);
 
 
-INSERT INTO Dim_Student SELECT LastName, FirstName, Email,1, CAST(GETDATE() AS DATE),
- '2015-01-01',Stundent_Index FROM TEMP WHERE action = 'UPDATE'
+ DECLARE @today DATE = CAST(GETDATE() AS DATE);
 
-
+INSERT INTO Dim_Student(
+  LastName,
+  FirstName,
+  Email,
+  IsCurrent,
+  StartTime,
+  EndTime,
+  Student_Index
+	)
+		SELECT 
+		c1,
+		c2,
+		c3,
+		1,
+		@today,
+		NULL,
+		c7
+		FROM vETLDimStudentData
+				EXCEPT
+				SELECT 
+				LastName,
+				FirstName,
+				Email,
+				1,
+				@today,
+				NULL,
+				Student_Index
+					FROM Dim_Student;
 SELECT * FROM Dim_Student order by Dim_Student.Student_Index
 
-SELECT * FROM TEMP WHERE action = 'update'
 SELECT * FROM vETLDimStudentData
 --new insert 
-INSERT INTO uniLearnDB.dbo.Students VALUES(10001,'Robert','Rodriguez', 'laura27@example.net',10000)
+INSERT INTO uniLearnDB.dbo.Students VALUES(10001,'Robert','Rodriguez', 'laura2g57@example.net',10000)
 --update 
 UPDATE uniLearnDB.dbo.Students 
-SET Email = 'newemali@gmail.com'
+SET Email = 'hotma4il@gmail.com'
 WHERE Student_Index = 9999
 
 
@@ -64,5 +86,3 @@ DELETE FROM uniLearnDB.dbo.Students WHERE  Student_ID > 10000;
 
 
 DROP VIEW vETLDimStudentData;
-DROP TABLE Dim_Student
-DROP TABLE Fact_Enrollment
