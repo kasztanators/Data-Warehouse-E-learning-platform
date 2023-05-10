@@ -20,12 +20,6 @@ USING vETLDimFacultyData AS ST
 WHEN NOT MATCHED
     THEN
         INSERT (Name)
-        VALUES (ST.Name)
-WHEN NOT MATCHED BY SOURCE
-    THEN
-        DELETE;
-
+        VALUES (ST.Name);
 DROP VIEW vETLDimFacultyData;
 
-SELECT * FROM Dim_Faculty
-ORDER BY ID_Faculty

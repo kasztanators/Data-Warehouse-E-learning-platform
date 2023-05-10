@@ -7,7 +7,7 @@ GO
 CREATE VIEW vETLDimTutorData
 AS
 SELECT
-    ROW_NUMBER() OVER (ORDER BY Tutor_ID) AS ID_Tutor,
+    [Tutor_ID],
     [FirstName],
     [LastName]
 FROM uniLearnDB.dbo.Tutors;
@@ -15,13 +15,10 @@ GO
 
 MERGE INTO Dim_Tutor AS TT
 USING vETLDimTutorData AS ST
-    ON TT.FirstName = ST.FirstName AND TT.LastName = ST.LastName
+    ON TT.FirstName = ST.FirstName AND TT.LastName = ST.LastName AND TT.ID_Tutor = ST.Tutor_ID
 WHEN NOT MATCHED
     THEN INSERT (FirstName, LastName)
-         VALUES (ST.FirstName, ST.LastName)
-WHEN NOT MATCHED BY SOURCE
-    THEN DELETE;
+         VALUES (ST.FirstName, ST.LastName);
 
 DROP VIEW vETLDimTutorData;
 
-SELECT * FROM Dim_Tutor;

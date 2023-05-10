@@ -8,11 +8,13 @@ GO
 CREATE VIEW vETLTeachingsData
 AS
 SELECT
-    T.Tutor_ID,
-    C.Course_ID
-FROM uniLearnDB.dbo.Courses AS C
-JOIN uniLearnDB.dbo.Teachings AS TC ON C.Course_ID = TC.Course_ID
-JOIN uniLearnDB.dbo.Tutors AS T ON TC.Tutor_ID = T.Tutor_ID;
+    TC.Tutor_ID,
+    TC.Course_ID
+FROM uniLearnDB.dbo.Teachings AS TC
+JOIN  uniLearnDB.dbo.Courses AS C ON C.Course_ID = TC.Course_ID
+JOIN  uniLearnDB.dbo.Tutors AS T ON T.Tutor_ID= TC.Tutor_ID
+
+
 
 GO
 MERGE INTO Fact_Teachings AS FT
@@ -25,4 +27,3 @@ MERGE INTO Fact_Teachings AS FT
 
 DROP VIEW vETLTeachingsData;
 
-SELECT COUNT(*) FROM Fact_Teachings

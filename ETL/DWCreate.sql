@@ -23,9 +23,10 @@ CREATE TABLE Dim_Student (
   Email VARCHAR(60),
   IsCurrent BIT,
   StartTime DateTime,
-  EndTime DateTime
+  EndTime DateTime,
+  Student_Index NUMERIC
 );
-
+ALTER TABLE Dim_Student ADD CONSTRAINT UC_Dim_Student UNIQUE (LastName, FirstName, Email,Student_Index);
 CREATE TABLE Dim_Time (
   ID_Time NUMERIC IDENTITY(1,1) PRIMARY KEY,
   Hour NUMERIC,

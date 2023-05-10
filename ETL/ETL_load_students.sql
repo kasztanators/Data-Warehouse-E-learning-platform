@@ -16,10 +16,11 @@ If (object_id('vETLDimStudentData') is not null) Drop View vETLDimStudentData;
 go
 CREATE VIEW vETLDimStudentData
 AS
-SELECT DISTINCT
+SELECT
 	LastName as [c1],
 	FirstName as [c2],
 	Email as [c3],
+	1 AS [c4], 
 	'2015-01-01' as [c5],
 	NULL as[c6],
 	Student_Index as [c7]
@@ -28,14 +29,14 @@ GO
 
 MERGE INTO Dim_Student as TT
 USING vETLDimStudentData as ST
-	ON TT.LastName = ST.[c1] 
-	AND TT.FirstName = ST.[c2] 
-	AND TT.Student_Index = ST.[c7]
+	ON  TT.Student_Index = ST.[c7]
 	WHEN NOT MATCHED  THEN
 		INSERT (LastName, FirstName, Email, IsCurrent, StartTime, EndTime, Student_Index)
 		VALUES (ST.[c1], ST.[c2], ST.[c3], 1, '2015-01-01', NULL, ST.[c7])
-	WHEN MATCHED AND TT.Email <> ST.[c3] AND TT.isCurrent !=0  THEN
-		UPDATE SET IsCurrent = 0, EndTime = CAST(GETDATE() AS DATE);
+	WHEN MATCHED AND TT.Email <> ST.[c3] AND TT.isCurrent !=0   THEN
+		UPDATE SET IsCurrent = 0, EndTime = CAST(GETDATE() AS DATE)
+	WHEN Not Matched BY Source AND TT.Student_Index != '-1' THEN
+	UPDATE SET IsCurrent = 0, EndTime = CAST(GETDATE() AS DATE);
 
 
  DECLARE @today DATE = CAST(GETDATE() AS DATE);
@@ -68,20 +69,7 @@ INSERT INTO Dim_Student(
 				NULL,
 				Student_Index
 					FROM Dim_Student;
-SELECT * FROM Dim_Student order by Dim_Student.Student_Index
 
-SELECT * FROM vETLDimStudentData
---new insert 
-INSERT INTO uniLearnDB.dbo.Students VALUES(10001,'Robert','Rodriguez', 'laura2g57@example.net',10000)
---update 
-UPDATE uniLearnDB.dbo.Students 
-SET Email = 'hotma4il@gmail.com'
-WHERE Student_Index = 9999
-
-
-SELECT * FROM uniLearnDB.dbo.Students order by Student_Index
-
-DELETE FROM uniLearnDB.dbo.Students WHERE  Student_ID > 10000;
 
 
 

@@ -29,11 +29,6 @@ MERGE INTO Dim_Course AS TT
     WHEN NOT MATCHED
         THEN
             INSERT (Name, NumOfHours, ID_Faculty)
-            VALUES (ST.Name, ST.NumOfHours, ST.Faculty_ID)
-    WHEN NOT MATCHED BY SOURCE
-        THEN
-            DELETE;
+            VALUES (ST.Name, ST.NumOfHours, ST.Faculty_ID);
 
 DROP VIEW vETLDimCourseData;
-
-SELECT * FROM Dim_Course;
