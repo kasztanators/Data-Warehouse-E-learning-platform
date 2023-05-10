@@ -93,7 +93,5 @@ MERGE INTO Fact_Enrollment as TT
 
 Drop view vETLFEnrollments;
 
-SELECT * FROM Fact_Enrollment
-where ID_FinishDate = -1
 
 
