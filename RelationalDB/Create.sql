@@ -18,6 +18,7 @@ CREATE TABLE Students (
 	Student_Index int
 	PRIMARY KEY (Student_ID)
 	);
+	ALTER TABLE uniLearnDB.dbo.Students ADD CONSTRAINT UC_Students UNIQUE (LastName, FirstName, Email, Student_Index);
 CREATE TABLE Courses (
 	Course_ID int CHECK(Course_ID > 0) NOT NULL,
 	[Name] varchar(50) NOT NULL,
@@ -33,7 +34,7 @@ CREATE TABLE Teachings (
 	FOREIGN KEY (Tutor_ID) REFERENCES Tutors(Tutor_ID),
 	FOREIGN KEY (Course_ID) REFERENCES Courses(Course_ID)
 	);
-
+	
 CREATE TABLE Enrollments (
 	Enrollment_ID int CHECK(Enrollment_ID > 0) NOT NULL,
 	Date_of_Start datetime,
