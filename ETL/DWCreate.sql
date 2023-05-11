@@ -11,6 +11,16 @@ DROP TABLE Dim_Time;
 DROP TABLE Dim_Student;
 DROP TABLE Dim_Survey;
 
+DELETE FROM Fact_Teachings;
+DELETE FROM Fact_Enrollment;
+DELETE FROM Dim_Course;
+DELETE FROM Dim_Faculty;
+DELETE FROM Dim_Tutor;
+DELETE FROM Dim_Date;
+DELETE FROM Dim_Time;
+DELETE FROM Dim_Student;
+DELETE FROM Dim_Survey;
+
 CREATE TABLE Dim_Survey (
   ID_Survey  NUMERIC IDENTITY(1,1) PRIMARY KEY,
   Status VARCHAR(14)

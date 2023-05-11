@@ -1,10 +1,7 @@
 USE uniLearn;
 GO
 
-INSERT INTO [dbo].[Dim_Survey]
-SELECT s
-FROM (
-	VALUES
-	('fulfilled'),
-	('not fulfilled')
-) AS Status(s);
+SET IDENTITY_INSERT dbo.Dim_Survey ON;  
+INSERT INTO Dim_Survey (ID_Survey, Status) VALUES (1, 'fulfilled');
+INSERT INTO Dim_Survey (ID_Survey, Status) VALUES (2, 'not fulfilled');
+SET IDENTITY_INSERT dbo.Dim_Survey OFF; 
