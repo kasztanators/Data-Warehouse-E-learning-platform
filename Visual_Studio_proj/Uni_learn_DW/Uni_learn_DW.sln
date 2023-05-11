@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33423.256
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D2ABAB84-BF74-430A-B69E-9DC6D40DDA17}") = "Uni_learn_DW", "Uni_learn_DW\Uni_learn_DW.dwproj", "{3D55A5AC-6F0E-47E9-97FC-906B661677C0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3D55A5AC-6F0E-47E9-97FC-906B661677C0}.Development|Default.ActiveCfg = Development
+		{3D55A5AC-6F0E-47E9-97FC-906B661677C0}.Development|Default.Build.0 = Development
+		{3D55A5AC-6F0E-47E9-97FC-906B661677C0}.Development|Default.Deploy.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {228FC2D9-764B-4CD5-A656-5E25C01A1B30}
+	EndGlobalSection
+EndGlobal
