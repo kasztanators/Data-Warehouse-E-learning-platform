@@ -97,4 +97,3 @@ CREATE TABLE Fact_Teachings (
   ID_Course NUMERIC REFERENCES Dim_Course(ID_Course)
   CONSTRAINT Teachings_PK PRIMARY KEY (ID_Tutor, ID_Course)
 );
-

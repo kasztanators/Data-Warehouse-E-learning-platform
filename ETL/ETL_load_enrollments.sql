@@ -51,6 +51,7 @@ FROM
 		, HardnessRate = CASE WHEN SurTemp.HardnessRate  IS NOT NULL THEN SurTemp.HardnessRate ELSE 0 END
 		, TutorRate = CASE WHEN SurTemp.TutorRate  IS NOT NULL THEN SurTemp.TutorRate ELSE 0 END
 	FROM uniLearnDB.dbo.Enrollments as EN1
+	JOIN  unilearn.dbo.Dim_Student AS S ON S.ID_Student = EN1.Student_ID
 	JOIN  unilearn.dbo.Dim_Course AS C ON C.ID_Course = EN1.Course_ID
 	FULL  JOIN dbo.SurveyTemp AS SurTemp ON SurTemp.ID_Enrollment = EN1.Enrollment_ID
 	JOIN dbo.Dim_Date AS SD ON CONVERT(VARCHAR(10), SD.Date, 111) = CONVERT(VARCHAR(10), EN1.Date_of_Start, 111)
@@ -93,6 +94,3 @@ MERGE INTO Fact_Enrollment as TT
 			);
 
 Drop view vETLFEnrollments;
-
-
-

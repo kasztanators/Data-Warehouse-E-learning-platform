@@ -6,10 +6,15 @@ WHERE ID_Student = 10001
 
 SELECT * FROM vETLDimStudentData
 --new insert 
-INSERT INTO uniLearnDB.dbo.Students VALUES(10001,'Rorewbert','Rodrifsdguez', 'laeura2g57@example.net',100001)
+INSERT INTO uniLearnDB.dbo.Students VALUES(10002,'Rorewbert','Rodrifsdguez', 'laeura2g57@example.net',100001)
+
+INSERT INTO uniLearnDB.dbo.Enrollments VALUES(5000001,'2015-10-23 00:09:04.000',3, 100,'2016-02-09 00:09:04.000',10001,12)
+
+SELECt * from uniLearnDB.dbo.Enrollments
+order by Student_ID
 --update 
 UPDATE uniLearnDB.dbo.Students 
-SET Email = 'hotmra4reil@gmail.com'
+SET Email = 'fsdfdsf@gmail.com'
 WHERE Student_Index = 9999
 
 
