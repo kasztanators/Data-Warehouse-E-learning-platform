@@ -4,7 +4,7 @@ import csv
 fake = Faker()
 
 # Generate 500 rows of data
-num_rows = 350
+num_rows = 1000
 data = []
 for i in range(1, num_rows+1):
     name = fake.first_name()
