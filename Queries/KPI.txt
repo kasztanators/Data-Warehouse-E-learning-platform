@@ -7,7 +7,7 @@ BetterGrade
 [ID Start Date].[Hierarchy].[Year], 1,
 [ID Start Date].[Hierarchy].CurrentMember ) ) * 1.08
 --Status Expression
-IIf(KPIVALUE(“BetterGrade”) > KPIGoal(“BetterGrade”), 1, -1)
+IIf (KPIVALUE( "BetterGrade" ) > KPIGoal("BetterGrade"), 1, -1)
 --Trend Expression
 IIf ( KPIValue( "BetterGrade" ) > ( KPIValue( "BetterGrade" ), ParallelPeriod (
 [ID Start Date].[Hierarchy].[Year], 1,
