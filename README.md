@@ -16,7 +16,7 @@ Data warehouse for an E-Learning platform. Business goals of the e-learning plat
   -  [Data generators](https://github.com/kasztanators/Data-Warehouse-E-learning-platform/tree/main/generator) in Python
   -  [SCD 2](https://github.com/kasztanators/Data-Warehouse-E-learning-platform/blob/main/ETL/ETL_load_students.sql) implementation and [explanation](https://github.com/kasztanators/Data-Warehouse-E-learning-platform/blob/main/project_report/SCD2%20explanation.pdf).
   -  [Visual Studio project](https://github.com/kasztanators/Data-Warehouse-E-learning-platform/tree/main/Visual_Studio_proj) Cube with hierarchies
-  -  Project [Documentation](https://github.com/kasztanators/Data-Warehouse-E-learning-platform/tree/main/project_report)
+  -  Project [Documentation](https://github.com/kasztanators/Data-Warehouse-E-learning-platform/tree/main/project_report) and DW [optimization report](https://github.com/kasztanators/Data-Warehouse-E-learning-platform/blob/main/project_report/OptimizationReport.pdf)
 
 ## Screenshots
 
