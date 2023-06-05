@@ -2,6 +2,8 @@
 # E-Learning Platform Data Warehouse
 Group project with: [Aleksander Blok](https://github.com/olekblok)
 
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+
 Data warehouse for an E-Learning platform. Business goals of the e-learning platform “UniLearn” is to provide increase course completion rates by 4% compared to the previous year, and improve the average student grades by 8% by the end of the semester compared to the previous year. Source of data - e-learning platform database and data generators.
 
 ## Project contains: 
@@ -9,7 +11,7 @@ Data warehouse for an E-Learning platform. Business goals of the e-learning plat
   -  [MDX](https://github.com/kasztanators/Data-Warehouse-E-learning-platform/blob/main/Queries/MDXQuery.mdx) queries
   -  [KPI](https://github.com/kasztanators/Data-Warehouse-E-learning-platform/blob/main/Queries/KPI.txt) queries
   -  [BI dashboards](https://github.com/kasztanators/Data-Warehouse-E-learning-platform/blob/main/powerBi/report.pdf)  to represent the data.
-  -  [ETL process](https://github.com/kasztanators/Data-Warehouse-E-learning-platform/tree/main/ETL) written in SQL
+  -  [ETL process](https://github.com/kasztanators/Data-Warehouse-E-learning-platform/tree/main/ETL) written in T-SQL
   -  [Data generators](https://github.com/kasztanators/Data-Warehouse-E-learning-platform/tree/main/generator) in Python
   -  [SCD 2](https://github.com/kasztanators/Data-Warehouse-E-learning-platform/blob/main/ETL/ETL_load_students.sql) implementation.
   -  [Visual Studio project](https://github.com/kasztanators/Data-Warehouse-E-learning-platform/tree/main/Visual_Studio_proj) Cube with hierarchies
